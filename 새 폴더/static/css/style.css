@@ -1,0 +1,28 @@
+/* styles.css */
+
+body {
+  background-color: #f8f7f9; /* Light violet */
+}
+
+.text-center {
+  color: #a93f77; /* Dark pink */
+}
+
+.card {
+  background-color: #fff; /* White */
+  border: 1px solid #e3e3e3; /* Light gray */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.btn-like {
+  color: #e91e63; /* Dark pink */
+}
+
+.btn-like:hover {
+  color: #ff4081; /* Light pink */
+}

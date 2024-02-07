@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond Fashion</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha384-lB6jN6ERbY4eXfEX1sYZg4z3pBQa2A4zZb5lRB/JooPAZgyeYr8+GjI5KXAZovTc"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="#">
+        <img
+          src="{{ url_for('static', filename='images/beyondLogo.jpg') }}"
+          alt="my-style Logo"
+          style="height: 50px"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#ai-design">AI Design</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#video">Get Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Button -->
+    <section id="hero" class="hero-button mt-5 mb-5 p-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12 text-center">
+            <h1 class="display-4">Beyond Fashion</h1>
+            <p class="lead">
+              Create your authentic style inspired by your favorite mood or
+              brand!<br />
+              Explore exclusive collections tailored for those who love to
+              express themselves through fashion with a touch of sophistication
+              and creativity.
+            </p>
+            <a
+              href="{{ url_for('ai_processing') }}"
+              class="btn btn-outline-primary btn-lg custom-btn"
+              >Get Started</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image and Description Section -->
+    <section id="products" class="image-description mt-5 mb-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h2 class="display-4">Our Products</h2>
+            <p class="lead">
+              Create your authentic style inspired by your favorite mood or
+              brand!<br />
+              Explore exclusive collections tailored for those who love to
+              express themselves through fashion with a touch of sophistication
+              and creativity.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="{{ url_for('static', filename='images/2.png') }}"
+              alt="Hero Image"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Fashion Design Section -->
+    <section id="ai-design" class="ai-design-section mt-5 mb-5">
+      <div class="container text-center mt-5 mb-5">
+        <h2 class="display-4">Instant Design Generation</h2>
+        <p class="lead mt-5 mb-5">
+          Create thousands of realistic AI fashion designs in seconds.
+        </p>
+        <div class="row">
+          <div class="col-md-3">
+            <h3>Quick and Easy</h3>
+            <p>Generate AI fashion designs instantly with just a few clicks.</p>
+          </div>
+          <div class="col-md-3">
+            <h3>Simple Photo Capture</h3>
+            <p>Capture professional AI fashion photos in minutes.</p>
+          </div>
+
+          <div class="col-md-3">
+            <h3>Save Time and Costs</h3>
+            <p>Cut costs and reduce time to market for your fashion designs.</p>
+          </div>
+          <div class="col-md-3">
+            <h3>Elevate Your Game</h3>
+            <p>
+              Join the era of infinite innovation with Resleeve at your
+              fingertips.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section with Get Started Button -->
+    <section id="video" class="video-section mt-5 mb-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <video width="100%" height="auto" controls autoplay muted loop>
+              <source
+                src="{{ url_for('static', filename='03-Sketch.mp4') }}"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="col-md-6 text-center">
+            <h2 class="display-4">Get Started</h2>
+            <p class="lead">
+              Ready to experience the future of fashion? Click the button below
+              to get started.
+            </p>
+            <a
+              href="{{ url_for('ai_processing') }}"
+              class="btn btn-outline-primary btn-lg custom-btn"
+              >Get Started</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products mt-5 mb-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Our Products</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="product">
+              <img
+                src="{{ url_for('static', filename='images/1.png') }}"
+                alt="Product 1"
+                class="img-fluid"
+              />
+              <h3 class="mt-3">Product 1</h3>
+              <p>Description of Product 1.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product">
+              <img
+                src="{{ url_for('static', filename='images/3.png') }}"
+                alt="Product 2"
+                class="img-fluid"
+              />
+              <h3 class="mt-3">Product 2</h3>
+              <p>Description of Product 2.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product">
+              <img
+                src="{{ url_for('static', filename='images/1.png') }}"
+                alt="Product 3"
+                class="img-fluid"
+              />
+              <h3 class="mt-3">Product 3</h3>
+              <p>Description of Product 3.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact mt-5 mb-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <p class="text-center">Get in touch with us for more information.</p>
+        <p class="text-center">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:info@my-style.ai">info@my-style.ai</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+      <p>&copy; 2024 my-style. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

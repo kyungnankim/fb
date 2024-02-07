@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my-style</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .upload-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #5bc0de; /* 배경색을 변경하세요 */
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        .upload-button:hover {
+            background-color: #4298e1; /* 마우스 오버 시 배경색 변경 */
+        }
+
+        .upload-button i {
+            color: white; /* 아이콘 색상을 변경하세요 */
+        }
+    </style>
+    <style>
+      .btn-like {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        font-size: inherit;
+        cursor: pointer;
+        color: #007bff;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var signupButton = document.getElementById('signupButton');
+        var loginButton = document.getElementById('loginButton');
+        var logoutButton = document.getElementById('logoutButton');
+
+        function updateButtonVisibility() {
+          var userUid = '{{ session.get("user_uid") }}';
+
+          signupButton.style.display = 'inline-block';
+          loginButton.style.display = 'inline-block';
+          logoutButton.style.display = 'none';
+
+          if (userUid) {
+            signupButton.style.display = 'none';
+            loginButton.style.display = 'none';
+            logoutButton.style.display = 'inline-block';
+          }
+        }
+
+        updateButtonVisibility();
+        var categoryLinks = document.querySelectorAll('.nav-link');
+        categoryLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            var selectedCategory = link.innerText;
+            window.location.href = '/category/' + selectedCategory;
+          });
+        });
+        logoutButton.addEventListener('click', function () {
+          window.location.href = '/logout';
+        });
+      });
+    </script>
+
+    <title>my-style</title>
+  </head>
+  <!-- ... (이전 코드) ... -->
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('home') }}">my-style</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          {% for category in categories %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ category }}</a>
+          </li>
+          {% endfor %} {% if session.get("user_uid") %}
+          <li class="nav-item">
+            <a id="logoutButton" class="nav-link" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a id="signupButton" class="nav-link" href="{{ url_for('signup') }}"
+              >Sign Up</a
+            >
+          </li>
+          <li class="nav-item">
+            <a id="loginButton" class="nav-link" href="{{ url_for('login') }}"
+              >Login</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="container mt-3">
+          <div class="row">
+            <div class="col-md-12">
+              {% if welcome_message %}
+              <p class="alert alert-success">{{ welcome_message }}</p>
+              {% else %}
+              <p class="alert alert-info">
+                Welcome to my-style! Feel free to explore our products.
+              </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="{{ product.image }}"
+              class="card-img-top"
+              alt="{{ product.name }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text"></p>
+              <button
+                class="btn btn-like"
+                onclick="likeProduct({{ product.id }})"
+              >
+                ❤️
+                <span id="likesCount{{ product.id }}">{{ product.likes }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <div class="row justify-content-end">
+        <div class="col-md-6">
+          <div class="alert alert-info text-right" role="alert">
+            {% if welcome_message %} {{ welcome_message }} {% else %} Welcome to
+            my-style! Feel free to explore our products. {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- 이미지 업로드 버튼 -->
+<a href="/upload" class="upload-button">
+  <i class="fas fa-plus fa-lg"></i>
+</a>
+
+<script>
+  function openFileInput() {
+    // 파일 입력(input) 요소를 클릭합니다.
+    document.getElementById('imageUploadInput').click();
+  }
+</script>
+
+
+
+    <script>
+      function likeProduct(productId) {
+        // You can implement the logic to send a request to your server to update the likes count
+        // For simplicity, let's just update the count on the client side
+        var likesCountElement = document.getElementById(
+          'likesCount' + productId
+        );
+        var currentLikes = parseInt(likesCountElement.innerText);
+        likesCountElement.innerText = currentLikes + 1;
+      }
+
+      // 추가: 카테고리 클릭 시 해당 카테고리 페이지로 이동
+      document.addEventListener('DOMContentLoaded', function () {
+        var categoryLinks = document.querySelectorAll('.nav-link');
+        categoryLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            var selectedCategory = link.innerText;
+            window.location.href = '/category/' + selectedCategory;
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>

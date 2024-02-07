@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Clone</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="container mt-5">
+    <div class="text-center">
+      <h1 class="text-center">{{ user_info.username }}</h1>
+      <p class="text-muted">
+        Followers: {{ user_info.followers }} | Following: {{ user_info.following
+        }}
+      </p>
+    </div>
+
+    <div class="row mt-3">
+      {% for photo in photos %}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img
+            src="{{ photo.url }}"
+            class="card-img-top"
+            alt="{{ photo.caption }}"
+          />
+          <div class="card-body">
+            <p class="card-text">{{ photo.caption }}</p>
+            <button
+              class="btn btn-link btn-like"
+              data-photo-id="{{ photo.id }}"
+            >
+              <i class="fas fa-heart"></i> Like
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Font Awesome -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy50B73vExbqlM+Iw/iKp35e/b6+tI9d3j"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Add this at the bottom of your body tag in index.html -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Add event listeners to each like button
+        var likeButtons = document.querySelectorAll('.btn-like');
+        likeButtons.forEach(function (button) {
+          button.addEventListener('click', function () {
+            var photoId = button.getAttribute('data-photo-id');
+            // You can add logic here to handle the like action for the photo with id 'photoId'
+            alert('Liked photo with id: ' + photoId);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Image</title>
+</head>
+<body>
+    <h1>Uploaded Image</h1>
+    <img src="{{ random_img }}" alt="Uploaded Image">
+    <button id="upload-button" class="btn btn-primary mt-3">등록하기</button>
+
+    <script>
+        document.getElementById('upload-button').addEventListener('click', function() {
+            // 이미지 파일의 경로를 서버로 전송
+            var imgPath = "{{ random_img }}";
+            fetch('/upload', {
+                method: 'POST', // Ensure that the method is POST
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image_path: imgPath })
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Image uploaded successfully');
+                } else {
+                    console.error('Failed to upload image');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

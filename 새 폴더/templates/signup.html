@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my-style</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <style>
+      .btn-like {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        font-size: inherit;
+        cursor: pointer;
+        color: #007bff;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var signupForm = document.getElementById('signupForm');
+        if (signupForm) {
+          signupForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // 비밀번호 길이 확인 추가
+            var passwordInput = document.getElementById('password');
+            if (passwordInput.value.length < 6) {
+              console.error('Password should be at least 6 characters');
+              return;
+            }
+
+            var formData = new FormData(signupForm);
+            try {
+              var response = await fetch('/signup', {
+                method: 'POST',
+                body: formData,
+              });
+
+              if (response.ok) {
+                window.location.href = '/';
+              } else {
+                console.error('Signup failed:', response.statusText);
+              }
+            } catch (error) {
+              console.error('Signup failed:', error.message);
+            }
+          });
+        }
+      });
+    </script>
+    <title>my-style</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ url_for('home') }}">my-style</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          {% for category in categories %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ category }}</a>
+          </li>
+          {% endfor %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('ai') }}">AI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% if welcome_message %}
+    <p>{{ welcome_message }}</p>
+    {% else %}
+    <p>Welcome to my-style! Feel free to explore our products.</p>
+    {% endif %}
+    <div class="container mt-5">
+      <h2>Sign Up</h2>
+      <form method="POST" action="{{ url_for('signup') }}">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

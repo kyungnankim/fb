@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from flask_ngrok import run_with_ngrok  # Import run_with_ngrok
+#from flask_ngrok import run_with_ngrok  # Import run_with_ngrok
 
 import os
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 # Add this line to enable ngrok when the app is run
-run_with_ngrok(app)
+#run_with_ngrok(app)
 
 @app.route('/')
 def home():
